@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Work item form page sample</title>
+</head>
+
+<body style="overflow:auto;">
+    <script src="bower_components/vss-web-extension-sdk/lib/VSS.SDK.min.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+
+    <script>
+        VSS.init({
+            explicitNotifyLoaded: true,
+            usePlatformScripts: true
+        });
+
+        VSS.require(["TFS/WorkItemTracking/Services"], function (_WorkItemServices) {
+
+            // Get the WorkItemFormService.  This service allows you to get/set fields/links on the 'active' work item (the work item
+            // that currently is displayed in the UI).
+            function getWorkItemFormService() {
+                return _WorkItemServices.WorkItemFormService.getService();
+            }
+
+            // Register a listener for the work item page contribution
+            VSS.register(VSS.getContribution().id, function () {
+                return {
+                    onLoaded: (workItemLoadedArgs) => {
+                        // create the control
+                        var fieldName = VSS.getConfiguration().witInputs["FieldName"];
+                        var colors = VSS.getConfiguration().witInputs["Colors"];
+                        var value = $(".computed-control-value")
+                    },
+                    onFieldChanged: (fieldChangedArgs) => {
+                        var changedValue = fieldChangedArgs.changedFields[control.getFieldName()];
+                        if (changedValue !== undefined) {
+                            control.updateExternal(changedValue);
+                        }
+                    }
+                }
+            });
+
+            VSS.notifyLoadSucceeded();
+        });
+    </script>
+
+    <div className="computed-control-value"></div>
+
+</body>
+
+</html>

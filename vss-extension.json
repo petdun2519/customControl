@@ -1,0 +1,76 @@
+{
+    "manifestVersion": 1.0,
+    "id": "samples-work-item-form",
+    "version": "0.1.6",
+    "name": "Work Item Form Sample",
+    "description": "Explore how to extend the work item form with new sections, actions, and more.",
+    "public": false,
+    "publisher": "fabrikam",
+    "icons": {
+        "default": "images/fabrikam-logo.png"
+    },
+    "tags": [
+        "Sample"
+    ],
+    "categories": [
+        "Developer samples"
+    ],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "scopes": [
+        "vso.work",
+        "vso.work_write"
+    ],
+    "files": [
+        {
+            "path": "workItemControl.html",
+            "addressable": true
+        },
+        {
+            "path": "bower_components/vss-web-extension-sdk/lib/VSS.SDK.min.js",
+            "addressable": true
+        }
+    ],
+    "contributions": [
+        {
+            "id": "sample-work-item-form-control",
+            "type": "ms.vss-work-web.work-item-form-control",
+            "description": "Custom work item form control",
+            "targets": [
+                "ms.vss-work-web.work-item-form"
+            ],
+            "properties": {
+                "name": "My Control",
+                "uri": "workItemControl.html",
+                "height": 600,
+                "inputs": [
+                    {
+                        "id": "FieldName",
+                        "description": "The field associated with the control.",
+                        "type": "WorkItemField",
+                        "properties": {
+                            "workItemFieldTypes": [
+                                "String"
+                            ]
+                        },
+                        "validation": {
+                            "dataType": "String",
+                            "isRequired": true
+                        }
+                    },
+                    {
+                        "id": "Colors",
+                        "description": "The colors that match the values in the control.",
+                        "validation": {
+                            "dataType": "String",
+                            "isRequired": false
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
